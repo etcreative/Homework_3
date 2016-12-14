@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+  		<title>Pychic Game</title>
+  	</head>
+  <body>
+
+  <div id="game">
+  		<p>Guess what letter I'm thinking of</p>
+  </div>
+
+<!-- I need the user to make a choice
+I need the cumputer to make a choice
+Capture those choices
+Compare these choices, and determine a win, loss, or tie
+Display the result to the user -->
+
+<script type="text/javascript">
+
+	var options = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+	var wins = 0;
+	var losses = 0;
+	var lives = 5;
+	var userGuesses = "";
+
+	document.onkeyup = function() { //*reads on the keyboard if the user is pressing a key or not.
+		if (lives === 0 ) {
+			return
+		}
+
+		var userguess = String.fromCharCode(event.keyCode).toLowerCase(); //*when the user presses a key, a variable will be created called "userguess" it's value will be set to the key the user presses on the keyboard (& its pre-determined 'keycode number').  We convert that keycode to a string (ie. if the user presses CharCode 65 on the keyboard the result will be "A").  Finally, we change the string character to a lower case.  
+		userGuesses = userguess + userGuesses;
+
+
+		//* Important take-aways.  The variable "userguess" will be re-assigned each time a user presses a key, as this function runs over and over.  The second, thing to remember, is the ".toLowerCase" function is called to account for user error by automatically converting the string to lower case.  This is important b/c we cant make sure the user is going to follow out instructions exactly.
+
+		var computerGuess = options[Math.floor(Math.random()*options.length)];
+
+
+		console.log(computerGuess, userguess);
+
+		
+
+		{
+						if (userguess==computerGuess) {
+							wins++;
+							alert("Wins: " + wins);
+						}
+						if (userguess!==computerGuess) {
+							losses++;
+							lives--;
+
+							alert ("You lose!" + losses);
+						}
+
+						if (lives === 0) {
+							alert ("Hit Refresh Too Bad!");
+						}
+					
+
+		var html = "<p>Guess a random letter to start playing</p>" +
+		"<p>wins: " + wins + "</p>" +
+		"<p>losses: " + losses + "</p>" +
+		"<p>lives: " + lives + "</p>" +
+		"<p>userGuesses: " + userGuesses + "</p>";
+
+document.querySelector('#game').innerHTML = html;
+
+
+		}
+	}
+
+</script>
+</body>
+</html>
